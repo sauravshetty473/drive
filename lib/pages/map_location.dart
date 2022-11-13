@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapLocation extends StatelessWidget {
   const MapLocation({Key? key}) : super(key: key);
-
+  static const LatLng source = LatLng(19.2312,  73.0891);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,12 +33,7 @@ class MapLocation extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Image.network(
-            'https://images.unsplash.com/photo-1584972191378-d70853fc47fc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
-            height: double.infinity,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
+          const GoogleMap(initialCameraPosition:  CameraPosition(target:  source, zoom: 14.5)),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
