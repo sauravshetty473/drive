@@ -1,5 +1,8 @@
+import 'package:drive/pages/home.dart';
+import 'package:drive/pages/login.dart';
 import 'package:drive/pages/map_location.dart';
 import 'package:drive/pages/profile.dart';
+import 'package:drive/pages/safety_alert.dart';
 import 'package:drive/pages/saved_place.dart';
 import 'package:drive/pages/wallet.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const Profile(),
+      home: const Login(),
     );
   }
 }
