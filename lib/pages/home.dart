@@ -2,6 +2,8 @@ import 'package:drive/pages/profile.dart';
 import 'package:drive/pages/saved_place.dart';
 import 'package:flutter/material.dart';
 
+import 'map_location.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -114,25 +116,34 @@ class _HomeState extends State<Home> {
             ),
             Container(
               margin: const EdgeInsets.only(bottom: 20),
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.location_history,
-                    color: Colors.black,
-                    size: 25,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    " Set destination on map",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black.withOpacity(0.8),
-                      fontSize: 20,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MapLocation()),
+                  );
+                },
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.location_history,
+                      color: Colors.black,
+                      size: 25,
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      " Set destination on map",
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black.withOpacity(0.8),
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Divider(

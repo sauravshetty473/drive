@@ -1,9 +1,10 @@
+import 'package:drive/pages/search_location.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapLocation extends StatelessWidget {
   const MapLocation({Key? key}) : super(key: key);
-  static const LatLng source = LatLng(19.2312,  73.0891);
+  static const LatLng source = LatLng(19.2312, 73.0891);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,9 @@ class MapLocation extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          const GoogleMap(initialCameraPosition:  CameraPosition(target:  source, zoom: 14.5)),
+          const GoogleMap(
+              initialCameraPosition:
+                  CameraPosition(target: source, zoom: 14.5)),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
@@ -141,12 +144,22 @@ class MapLocation extends StatelessWidget {
                             thickness: 2,
                             color: Colors.black.withOpacity(0.9),
                           ),
-                          Text(
-                            'Enter your destination',
-                            style: TextStyle(
-                              fontWeight: FontWeight.normal,
-                              color: Colors.black.withOpacity(0.9),
-                              fontSize: 20,
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SearchPlacesScreen()),
+                              );
+                            },
+                            child: Text(
+                              'Enter your destinsq1tion',
+                              style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black.withOpacity(0.9),
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ],
