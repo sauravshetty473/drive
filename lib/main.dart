@@ -1,10 +1,4 @@
-import 'package:drive/pages/home.dart';
-import 'package:drive/pages/login.dart';
-import 'package:drive/pages/map_location.dart';
-import 'package:drive/pages/profile.dart';
-import 'package:drive/pages/safety_alert.dart';
-import 'package:drive/pages/saved_place.dart';
-import 'package:drive/pages/wallet.dart';
+import 'package:drive/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Login(),
+      home: const SplashScreen(),
     );
   }
 }
