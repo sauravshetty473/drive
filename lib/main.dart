@@ -1,8 +1,27 @@
 import 'package:drive/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:scaled_app/scaled_app.dart';
+
+import 'mvvm/foundation/app_constants.dart';
+import 'mvvm/ui/bidding/bidding.dart';
 
 void main() {
-  runApp(const MyApp());
+  Paint.enableDithering = true;
+  ScaledWidgetsFlutterBinding.ensureInitialized(
+    scaleFactor: (deviceSize) {
+      if (deviceSize.width > deviceSize.height) {
+        return deviceSize.height / 667;
+      }
+      return deviceSize.width / AppConstants.BOX_WIDTH;
+    },
+  );
+
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const Bidding(),
     );
   }
 }
