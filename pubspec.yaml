@@ -33,6 +33,11 @@ dependencies:
   flutter:
     sdk: flutter
 
+  http: ^0.13.4
+  web3dart: ^2.4.1
+  web_socket_channel: ^2.2.0
+
+
   jovial_svg: ^1.1.12
   google_fonts: ^3.0.1
   scaled_app: ^1.0.0
@@ -42,7 +47,7 @@ dependencies:
   geolocator: ^9.0.1
   flutter_google_places: ^0.3.0
   awesome_snackbar_content: ^0.0.8
-  http: ^0.13.4
+
   google_maps_flutter: ^2.2.1
 
 
@@ -50,8 +55,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  web3dart: ^2.4.1
-  web_socket_channel: ^2.2.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -622,7 +622,7 @@ packages:
     source: hosted
     version: "2.1.4"
   web3dart:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: web3dart
       sha256: d40d3b2173b982e2b94c9e9589539b8556e9d0a44d3d79cd97d1f2ab2c35d7fe
@@ -630,7 +630,7 @@ packages:
     source: hosted
     version: "2.4.1"
   web_socket_channel:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: web_socket_channel
       sha256: "3a969ddcc204a3e34e863d204b29c0752716f78b6f9cc8235083208d268a4ccd"
