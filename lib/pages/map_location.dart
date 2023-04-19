@@ -154,7 +154,7 @@ class MapLocation extends StatelessWidget {
                               );
                             },
                             child: Text(
-                              'Enter your destinsq1tion',
+                              'Enter your destination',
                               style: TextStyle(
                                 fontWeight: FontWeight.normal,
                                 color: Colors.black.withOpacity(0.9),

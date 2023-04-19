@@ -1,5 +1,6 @@
 import 'package:drive/pages/profile.dart';
 import 'package:drive/pages/saved_place.dart';
+import 'package:drive/widgets/where_to.dart';
 import 'package:flutter/material.dart';
 
 import 'map_location.dart';
@@ -63,12 +64,18 @@ class _HomeState extends State<Home> {
               width: double.infinity,
               color: Colors.grey.withOpacity(0.3),
               alignment: Alignment.centerLeft,
-              child: Text(
-                "  Where To?",
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black.withOpacity(0.8),
-                  fontSize: 18,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => locationPick()));
+                },
+                child: Text(
+                  "  Where To?",
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black.withOpacity(0.8),
+                    fontSize: 18,
+                  ),
                 ),
               ),
             ),
@@ -156,7 +163,7 @@ class _HomeState extends State<Home> {
             ),
             Image.asset(
               "assets/map_image.png",
-              height: 360,
+              height: 280,
               width: double.infinity,
             )
           ],
