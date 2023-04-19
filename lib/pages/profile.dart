@@ -1,3 +1,4 @@
+import 'package:drive/pages/wallet.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
@@ -29,32 +30,38 @@ class Profile extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(20)),
-                              color: Colors.grey.withOpacity(0.3)),
-                          child: Row(
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                color: Colors.black,
-                                size: 16,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                '5.0',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black.withOpacity(0.8),
-                                  fontSize: 16,
+                        InkWell(
+                          onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Wallet())),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(20)),
+                                color: Colors.grey.withOpacity(0.3)),
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.black,
+                                  size: 16,
                                 ),
-                              ),
-                            ],
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  '5.0',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black.withOpacity(0.8),
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         )
                       ],
