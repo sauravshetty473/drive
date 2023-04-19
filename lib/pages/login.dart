@@ -1,4 +1,5 @@
-import 'package:drive/pages/safety_alert.dart';
+import 'package:drive/pages/home.dart';
+import 'package:drive/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -26,7 +27,7 @@ class _LoginState extends State<Login> {
                   height: 20,
                 ),
                 const Text(
-                  "Paste Your Account ID",
+                  "Enter Your Account ID",
                   style: TextStyle(
                     fontWeight: FontWeight.normal,
                     color: Colors.black,
@@ -53,19 +54,14 @@ class _LoginState extends State<Login> {
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(
-                  height: 40,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const Safety()),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(primary: Colors.black),
-                    child: const Text("Next"),
-                  ),
+                RoundButton(
+                  title: 'Next',
+                  OnTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 40,
@@ -131,7 +127,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "DDrive",
+                      "Drive",
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.black.withOpacity(0.8),
