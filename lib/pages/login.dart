@@ -1,146 +1,116 @@
-import 'package:drive/pages/home.dart';
-import 'package:drive/widgets/round_button.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Login> createState() => _MyPhoneState();
 }
 
-class _LoginState extends State<Login> {
+class _MyPhoneState extends State<Login> {
+  TextEditingController countryController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    countryController.text = "+91";
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 20,
+      body: Container(
+        margin: EdgeInsets.only(left: 25, right: 25),
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/img1.png',
+                width: 150,
+                height: 150,
+              ),
+              SizedBox(
+                height: 25,
+              ),
+              Text(
+                "Login/SignUp",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Enter your mobile number to get started",
+                style: TextStyle(
+                  fontSize: 16,
                 ),
-                const Text(
-                  "Enter Your Account ID",
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 50,
-                  width: double.infinity,
-                  color: Colors.grey.withOpacity(0.3),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "  Account ID",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black.withOpacity(0.5),
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                RoundButton(
-                  title: 'Next',
-                  OnTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Home()),
-                    );
-                  },
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "By continuing you may receive a SMS for verification. Message and data rates may apply.",
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black.withOpacity(0.5),
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Divider(
-                          color: Colors.black.withOpacity(0.8),
-                          thickness: 0.8,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text('OK'),
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: Colors.black.withOpacity(0.8),
-                          thickness: 0.8,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 50,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      // Red border with the width is equal to 5
-                      border: Border.all(
-                        width: 1,
-                        color: Colors.black,
-                      )),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "  Create new account",
-                    style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      color: Colors.black.withOpacity(0.5),
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 100,
-                ),
-                Row(
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                height: 55,
+                decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Drive",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black.withOpacity(0.8),
-                        fontSize: 40,
+                    SizedBox(
+                      width: 10,
+                    ),
+                    SizedBox(
+                      width: 40,
+                      child: TextField(
+                        controller: countryController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
                       ),
                     ),
+                    Text(
+                      "|",
+                      style: TextStyle(fontSize: 33, color: Colors.grey),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                        child: TextField(
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "Phone",
+                      ),
+                    ))
                   ],
-                )
-              ],
-            ))
-          ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 45,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Colors.green.shade600,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'verify');
+                    },
+                    child: Text("Send the code")),
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

@@ -49,6 +49,8 @@ dependencies:
   awesome_snackbar_content: ^0.0.8
   open_street_map_search_and_pick: ^0.0.16
   google_maps_flutter: ^2.2.1
+  pinput: ^2.2.31
+  upi_india: ^3.0.1
 
 
 dev_dependencies:
