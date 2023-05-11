@@ -47,7 +47,7 @@ dependencies:
   geolocator: ^9.0.1
   flutter_google_places: ^0.3.0
   awesome_snackbar_content: ^0.0.8
-
+  open_street_map_search_and_pick: ^0.0.16
   google_maps_flutter: ^2.2.1
 
 

@@ -1,10 +1,10 @@
 import 'package:drive/pages/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scaled_app/scaled_app.dart';
 
 import 'mvvm/foundation/app_constants.dart';
-import 'mvvm/ui/bidding/bidding.dart';
 
 void main() {
   Paint.enableDithering = true;
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Bidding(),
+      home: const SplashScreen(),
     );
   }
 }
