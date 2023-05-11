@@ -16,152 +16,154 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        child: Column(
-          children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Alex Star',
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Alex Star',
+                    style: TextStyle(
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black.withOpacity(0.8),
+                      fontSize: 30,
+                    ),
+                  ),
+                  const Spacer(),
+                  Container(
+                    width: 30,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        color: Colors.black),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Profile()),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.person,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 50,
+                width: double.infinity,
+                color: Colors.grey.withOpacity(0.3),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "  Where To?",
                   style: TextStyle(
                     fontWeight: FontWeight.normal,
                     color: Colors.black.withOpacity(0.8),
-                    fontSize: 30,
+                    fontSize: 18,
                   ),
                 ),
-                const Spacer(),
-                Container(
-                  width: 30,
-                  height: 30,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Colors.black),
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Profile()),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.person,
-                      color: Colors.white,
-                      size: 20,
-                    ),
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SavedPlace()),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Colors.black,
+                        size: 25,
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        " Choose a saved place",
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black.withOpacity(0.8),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 50,
-              width: double.infinity,
-              color: Colors.grey.withOpacity(0.3),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                "  Where To?",
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black.withOpacity(0.8),
-                  fontSize: 18,
-                ),
               ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SavedPlace()),
-                  );
-                },
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.star,
-                      color: Colors.black,
-                      size: 25,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      " Choose a saved place",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black.withOpacity(0.8),
-                        fontSize: 20,
+              Divider(
+                height: 5,
+                thickness: 2,
+                color: Colors.grey.withOpacity(0.5),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MapLocation()),
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.location_history,
+                        color: Colors.black,
+                        size: 25,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Divider(
-              height: 5,
-              thickness: 2,
-              color: Colors.grey.withOpacity(0.5),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: const EdgeInsets.only(bottom: 20),
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MapLocation()),
-                  );
-                },
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.location_history,
-                      color: Colors.black,
-                      size: 25,
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      " Set destination on map",
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black.withOpacity(0.8),
-                        fontSize: 20,
+                      const SizedBox(
+                        width: 10,
                       ),
-                    ),
-                  ],
+                      Text(
+                        " Set destination on map",
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black.withOpacity(0.8),
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Divider(
-              height: 5,
-              thickness: 2,
-              color: Colors.grey.withOpacity(0.5),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Image.asset(
-              "assets/map_image.png",
-              height: 360,
-              width: double.infinity,
-            )
-          ],
+              Divider(
+                height: 5,
+                thickness: 2,
+                color: Colors.grey.withOpacity(0.5),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Image.asset(
+                "assets/map_image.png",
+                height: 360,
+                width: double.infinity,
+              )
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
