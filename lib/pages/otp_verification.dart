@@ -1,3 +1,4 @@
+import 'package:drive/pages/home.dart';
 import 'package:drive/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -103,7 +104,12 @@ class _MyVerifyState extends State<MyVerify> {
                         primary: Colors.green.shade600,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Home()),
+                      );
+                    },
                     child: Text("Verify Phone Number")),
               ),
               Row(

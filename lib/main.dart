@@ -1,8 +1,6 @@
 import 'package:drive/pages/login.dart';
 import 'package:drive/pages/otp_verification.dart';
 import 'package:drive/pages/splash_screen.dart';
-import 'package:drive/services/payment_services.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scaled_app/scaled_app.dart';
@@ -42,7 +40,7 @@ class MyApp extends StatelessWidget {
         'login': (context) => Login(),
         'verify': (context) => MyVerify(),
       },
-      home: UpiPayment(),
+      home: SplashScreen(),
     );
   }
 }
