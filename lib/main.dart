@@ -1,5 +1,6 @@
 import 'package:drive/main_services.dart';
 import 'package:drive/pages/Login/designation.dart';
+import 'package:drive/pages/Login/driverdetails.dart';
 import 'package:drive/pages/Login/login.dart';
 import 'package:drive/pages/Login/userdetails.dart';
 import 'package:drive/pages/home.dart';
@@ -46,6 +47,7 @@ class MyApp extends HookConsumerWidget {
         'login': (context) => const Login(),
         'userdetails': (context) => UserDetails(),
         'home': (context) => Home(),
+        'driverdetails': (context) => DriverDetails(),
       },
       home: SplashScreen(),
     );
