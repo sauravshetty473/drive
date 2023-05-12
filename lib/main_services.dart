@@ -99,16 +99,35 @@ class MainServices extends ChangeNotifier {
       // Encode the function parameters
       final response = await _web3client.call(
         contract: _deployedContract,
-        function: _sayHello,
+        function: _registerAsPassenger,
         params: [],
       );
       print('no');
       print(response);
 
-      debugPrint('Active request created: $response');
+      debugPrint('User registered: $response');
     } catch (e) {
       print(e);
-      debugPrint('Error creating active request: $e');
+      debugPrint('Error registering user: $e');
+    }
+  }
+
+  Future<void> register(String name, String phonenumber) async {
+    print('what');
+    try {
+      // Encode the function parameters
+      final response = await _web3client.call(
+        contract: _deployedContract,
+        function: _registerAsPassenger,
+        params: [name, phonenumber],
+      );
+      print('no');
+      print(response);
+
+      debugPrint('User registered: $response');
+    } catch (e) {
+      print(e);
+      debugPrint('Error registering user: $e');
     }
   }
 }
