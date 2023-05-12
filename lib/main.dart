@@ -1,19 +1,10 @@
-import 'package:drive/mvvm/ui/confirmed_ride/confirmed_ride.dart';
-import 'package:drive/mvvm/ui/offer/offer.dart';
-import 'package:drive/mvvm/ui/put_price/put_price.dart';
-import 'package:drive/mvvm/ui/rate_driver/rate_driver.dart';
-import 'package:drive/mvvm/ui/select_destination/select_destination.dart';
-import 'package:drive/mvvm/ui/select_preference/select_preference.dart';
-import 'package:drive/pages/login.dart';
-
-import 'package:drive/pages/splash_screen.dart';
-import 'package:drive/services/payment_services.dart';
+import 'package:drive/pages/Login/designation.dart';
+import 'package:drive/pages/Login/login.dart';
+import 'package:drive/pages/Login/userdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scaled_app/scaled_app.dart';
-
 import 'mvvm/foundation/app_constants.dart';
-import 'mvvm/ui/offer/offer_driver.dart';
 
 void main() {
   Paint.enableDithering = true;
@@ -48,17 +39,10 @@ class MyApp extends HookConsumerWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        'login': (context) => Login(),
+        'login': (context) => const Login(),
+        'userdetails': (context) => UserDetails(),
       },
-      home: const [
-        SelectDestination(),
-        SelectPreference(),
-        Offer(),
-        ConfirmedRide(),
-        RateDriver(),
-        OfferDriver(),
-        PutPrice(),
-      ][index],
+      home: Designation(),
     );
   }
 }
