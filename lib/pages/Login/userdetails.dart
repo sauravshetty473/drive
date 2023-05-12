@@ -1,22 +1,26 @@
 import 'package:drive/main_services.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 
-class UserDetails extends StatefulWidget {
+class UserDetails extends StatefulHookConsumerWidget {
+  const UserDetails({super.key});
+
   @override
-  _UserDetailsState createState() => _UserDetailsState();
+  ConsumerState createState() => _UserDetailsState();
 }
 
-class _UserDetailsState extends State<UserDetails> {
+class _UserDetailsState extends ConsumerState<UserDetails> {
   TextEditingController namecontroller = TextEditingController();
   TextEditingController numbercontroller = TextEditingController();
   PhoneNumber number =
       PhoneNumber(countryISOCode: 'IN', number: '91', countryCode: '91');
-  MainServices m = new MainServices();
 
   @override
   Widget build(BuildContext context) {
+    final msClass = ref.watch(msProvider.notifier);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
