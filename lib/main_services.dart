@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:drive/main.dart';
 import 'package:flutter/services.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart' as http;
@@ -10,9 +9,9 @@ import 'package:web_socket_channel/io.dart';
 class MainServices extends ChangeNotifier {
   final String _rpcUrl = 'http://127.0.0.1:7545';
   final String _wsUrl = 'ws://127.0.0.1:7545';
-  final String driver_privatekey =
+  final String driverPrivateKey =
       '4395478c340cc700166039a04b60940df00b11a77b963d8e6d644dfc4155b588';
-  final String user_privatekey =
+  final String userPrivateKey =
       'c4461f08392a2b133474add96ec4936f7d7f08d4236f17f68cc4d889b9e6fc80';
   late Web3Client _web3client;
   MainServices() {
@@ -42,11 +41,11 @@ class MainServices extends ChangeNotifier {
         EthereumAddress.fromHex(jsonABI["networks"]["5777"]["address"]);
   }
 
-  late EthPrivateKey user_creds;
-  late EthPrivateKey driver_creds;
+  late EthPrivateKey userCredentials;
+  late EthPrivateKey driverCredentials;
   Future<void> getCredentials() async {
-    user_creds = EthPrivateKey.fromHex(user_privatekey);
-    driver_creds = EthPrivateKey.fromHex(driver_privatekey);
+    userCredentials = EthPrivateKey.fromHex(userPrivateKey);
+    driverCredentials = EthPrivateKey.fromHex(driverPrivateKey);
   }
 
   late DeployedContract _deployedContract;

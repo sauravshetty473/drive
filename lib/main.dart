@@ -1,3 +1,5 @@
+import 'package:drive/mvvm/ui/bidding/bidding.dart';
+import 'package:drive/mvvm/ui/select_destination/select_destination.dart';
 import 'package:drive/pages/splash_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scaled_app/scaled_app.dart';
 
 import 'mvvm/foundation/app_constants.dart';
+import 'mvvm/ui/select_preference/select_preference.dart';
 
 void main() {
   Paint.enableDithering = true;
@@ -35,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const SelectDestination(),
     );
   }
 }
