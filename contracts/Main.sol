@@ -41,6 +41,10 @@ contract Drive {
     mapping(address => address) public confirmedRides;
     mapping(address => address) public completedRides;
 
+    function sayHello() public pure returns (string memory) {
+        return "Hello, world!";
+    }
+
     function registerAsDriver(string memory _name, address payable _driverAddress, string memory _license, string memory _numberPlate, int256 _fare) public {
         // Make sure only the deployer can register a new Driver
         require(msg.sender == deployer, "Only the contract deployer can register a new driver");
