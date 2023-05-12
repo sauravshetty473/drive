@@ -1,3 +1,4 @@
+import 'package:drive/main_services.dart';
 import 'package:drive/mvvm/ui/confirmed_ride/confirmed_ride.dart';
 import 'package:drive/mvvm/ui/offer/offer.dart';
 import 'package:drive/mvvm/ui/put_price/put_price.dart';
@@ -41,6 +42,8 @@ class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final ms = MainServices();
     final index = ref.watch(pageIndexProvider);
     return MaterialApp(
       title: 'Flutter Demo',
@@ -48,7 +51,7 @@ class MyApp extends HookConsumerWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        'login': (context) => Login(),
+        'login': (context) => const Login(),
       },
       home: const [
         SelectDestination(),
