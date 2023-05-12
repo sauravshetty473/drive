@@ -44,24 +44,24 @@ contract Drive {
     event DriverAddedToLocation(address indexed passenger, address driver);
     event PriceAddedToLocation(address indexed passenger, int256 price);
 
-//    function getAllActiveRequests() public view returns (address[] memory) {
-//        uint256 activeRequestCount = 0;
-//        address[] memory activeRequests = new address[](msg.sender);
-//        for (uint256 i = 0; i < activeRequests.length; i++) {
-//            if (activeRequest[activeRequests[i]].fare == 0) {
-//                activeRequestCount++;
-//            }
-//        }
-//        address[] memory result = new address[](activeRequestCount);
-//        uint256 index = 0;
-//        for (uint256 i = 0; i < activeRequests.length; i++) {
-//            if (activeRequest[activeRequests[i]].fare == 0) {
-//                result[index] = activeRequests[i];
-//                index++;
-//            }
-//        }
-//        return result;
-//    }
+    //    function getAllActiveRequests() public view returns (address[] memory) {
+    //        uint256 activeRequestCount = 0;
+    //        address[] memory activeRequests = new address[](msg.sender);
+    //        for (uint256 i = 0; i < activeRequests.length; i++) {
+    //            if (activeRequest[activeRequests[i]].fare == 0) {
+    //                activeRequestCount++;
+    //            }
+    //        }
+    //        address[] memory result = new address[](activeRequestCount);
+    //        uint256 index = 0;
+    //        for (uint256 i = 0; i < activeRequests.length; i++) {
+    //            if (activeRequest[activeRequests[i]].fare == 0) {
+    //                result[index] = activeRequests[i];
+    //                index++;
+    //            }
+    //        }
+    //        return result;
+    //    }
 
     function registerAsDriver(string memory _name, address payable _driverAddress, string memory _license, string memory _numberPlate, int256 _fare) public {
         // Make sure only the deployer can register a new Driver

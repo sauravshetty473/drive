@@ -6,8 +6,6 @@ import 'package:web3dart/web3dart.dart';
 import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 
-
-
 class MainServices extends ChangeNotifier {
   final String _rpcUrl = 'http://127.0.0.1:7545';
   final String _wsUrl = 'ws://127.0.0.1:7545';
@@ -36,11 +34,11 @@ class MainServices extends ChangeNotifier {
   late ContractAbi _abiCode;
   late EthereumAddress _contractAddress;
   Future<void> getABI() async {
-    String abiFile = await rootBundle.loadString('build/contracts/Main.json');
+    String abiFile = await rootBundle.loadString('build/contracts/Drive.json');
     var jsonABI = jsonDecode(abiFile);
-    _abiCode = ContractAbi.fromJson(jsonEncode(jsonABI['abi']), 'Main');
+    _abiCode = ContractAbi.fromJson(jsonEncode(jsonABI['abi']), 'Drive');
     _contractAddress =
-        EthereumAddress.fromHex(jsonABI["networks"]["5777"]["address"]);
+        EthereumAddress.fromHex('0x57d0e2e7f14f4f3b19f15ba8789a270ef97755a3');
   }
 
   late EthPrivateKey userCredentials;
@@ -51,14 +49,15 @@ class MainServices extends ChangeNotifier {
   }
 
   late DeployedContract _deployedContract;
-  late ContractFunction _startJourney;
+  late ContractFunction _addPassenger;
   late ContractFunction _endJourney;
   late ContractFunction _transfer;
 
   Future<void> getDeployedContract() async {
     _deployedContract = DeployedContract(_abiCode, _contractAddress);
-    _startJourney = _deployedContract.function('startJourney');
-    _endJourney = _deployedContract.function('endJourney');
-    _transfer = _deployedContract.function('transfer');
+    _addPassenger = _deployedContract.function('registerAsPassenger');
   }
+
+
+
 }

@@ -70,9 +70,7 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
      },
 
-     contracts_build_directory : './src/contracts'
-
-
+    contracts_build_directory : './src/contracts',
     // An additional network, but with some advanced options…
     // advanced: {
     //   port: 8777,             // Custom port
@@ -101,7 +99,6 @@ module.exports = {
     // }
   },
 
-  contracts_directory: "./contracts",
   // Set default mocha options here, use special reporters, etc.
   mocha: {
     // timeout: 100000
@@ -132,8 +129,8 @@ module.exports = {
   // After you backed up your artifacts you can utilize db by running migrate as follows:
   // $ truffle migrate --reset --compile-all
   //
-   db: {
-     enabled: false,
+  // db: {
+  //   enabled: false,
   //   host: "127.0.0.1",
   //   adapter: {
   //     name: "indexeddb",
@@ -141,5 +138,5 @@ module.exports = {
   //       directory: ".db"
   //     }
   //   }
-   }
+  // }
 };

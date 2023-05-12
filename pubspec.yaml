@@ -81,7 +81,7 @@ flutter:
   assets:
     - assets/map_image.png
     - assets/
-    - build/contracts/Main.json
+    - build/contracts/
     - assets/taxi.png
   #   - images/a_dot_ham.jpeg
 
