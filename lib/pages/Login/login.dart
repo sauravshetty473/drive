@@ -8,15 +8,9 @@ class Login extends StatefulWidget {
 }
 
 class _MyPhoneState extends State<Login> {
-  TextEditingController countryController = TextEditingController();
+  TextEditingController privatekey = TextEditingController();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    countryController.text = "+91";
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +22,7 @@ class _MyPhoneState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/img1.png',
+                'assets/taxi.png',
                 width: 150,
                 height: 150,
               ),
@@ -43,7 +37,7 @@ class _MyPhoneState extends State<Login> {
                 height: 10,
               ),
               Text(
-                "Enter your mobile number to get started",
+                "Enter your private key to get started",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -63,29 +57,13 @@ class _MyPhoneState extends State<Login> {
                     SizedBox(
                       width: 10,
                     ),
-                    SizedBox(
-                      width: 40,
-                      child: TextField(
-                        controller: countryController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "|",
-                      style: TextStyle(fontSize: 33, color: Colors.grey),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
                     Expanded(
                         child: TextField(
-                      keyboardType: TextInputType.phone,
+                      controller: privatekey,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Phone",
+                        hintText: "Enter/Paste your private key",
                       ),
                     ))
                   ],
@@ -103,9 +81,9 @@ class _MyPhoneState extends State<Login> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     onPressed: () {
-                      Navigator.pushNamed(context, 'verify');
+                      Navigator.pushNamed(context, 'userdetails');
                     },
-                    child: Text("Send the code")),
+                    child: Text("Proceed")),
               )
             ],
           ),
