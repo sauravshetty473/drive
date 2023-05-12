@@ -41,28 +41,6 @@ contract Drive {
     mapping(address => address) public confirmedRides;
     mapping(address => address) public completedRides;
 
-    event DriverAddedToLocation(address indexed passenger, address driver);
-    event PriceAddedToLocation(address indexed passenger, int256 price);
-
-    //    function getAllActiveRequests() public view returns (address[] memory) {
-    //        uint256 activeRequestCount = 0;
-    //        address[] memory activeRequests = new address[](msg.sender);
-    //        for (uint256 i = 0; i < activeRequests.length; i++) {
-    //            if (activeRequest[activeRequests[i]].fare == 0) {
-    //                activeRequestCount++;
-    //            }
-    //        }
-    //        address[] memory result = new address[](activeRequestCount);
-    //        uint256 index = 0;
-    //        for (uint256 i = 0; i < activeRequests.length; i++) {
-    //            if (activeRequest[activeRequests[i]].fare == 0) {
-    //                result[index] = activeRequests[i];
-    //                index++;
-    //            }
-    //        }
-    //        return result;
-    //    }
-
     function registerAsDriver(string memory _name, address payable _driverAddress, string memory _license, string memory _numberPlate, int256 _fare) public {
         // Make sure only the deployer can register a new Driver
         require(msg.sender == deployer, "Only the contract deployer can register a new driver");
@@ -108,6 +86,14 @@ contract Drive {
         });
     }
 
+    function fetchDrivers() public view returns (Driver[] memory) {
+        return listDriver[msg.sender];
+    }
+
+    function fetchPrices() public view returns (int256[] memory) {
+        return price[msg.sender];
+    }
+
 
     function negotiatePrice(address _passengerAddress, int256 _price) public {
 
@@ -120,9 +106,7 @@ contract Drive {
         price[_passengerAddress].push(_price);
 
 
-        // Emit events for the updated mappings
-        emit DriverAddedToLocation(_passengerAddress, msg.sender);
-        emit PriceAddedToLocation(_passengerAddress, _price);
+
         // Store the driver's connection to the passenger in the driverConnection mapping
         driverConnection[_passengerAddress] = msg.sender;
     }

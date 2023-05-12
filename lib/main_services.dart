@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,10 @@ import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/io.dart';
 
 class MainServices extends ChangeNotifier {
+
+  late StreamSubscription _driverAddedSubscription;
+  late StreamSubscription _priceAddedSubscription;
+
   final String _rpcUrl = 'http://127.0.0.1:7545';
   final String _wsUrl = 'ws://127.0.0.1:7545';
   final String driverPrivateKey =
@@ -49,15 +54,34 @@ class MainServices extends ChangeNotifier {
   }
 
   late DeployedContract _deployedContract;
-  late ContractFunction _addPassenger;
-  late ContractFunction _endJourney;
-  late ContractFunction _transfer;
+  late ContractFunction _registerAsPassenger;
+  late ContractFunction _addRequest;
+  late ContractFunction _fetchDrivers;
+  late ContractFunction _fetchPrices;
 
   Future<void> getDeployedContract() async {
     _deployedContract = DeployedContract(_abiCode, _contractAddress);
-    _addPassenger = _deployedContract.function('registerAsPassenger');
+    _registerAsPassenger = _deployedContract.function('registerAsPassenger');
+    _addRequest = _deployedContract.function('createActiveRequest');
+    _fetchDrivers = _deployedContract.function('fetchDrivers');
+    _fetchPrices = _deployedContract.function('fetchPrices');
   }
 
-
-
+  Future<void> createActiveRequest(String pickUp, String dropOff, int distance) async {
+    try {
+      // Encode the function parameters
+      final response = await _web3client.call(
+        contract: _deployedContract,
+        function: _addRequest,
+        params: [
+          utf8.encode(pickUp),
+          utf8.encode(dropOff),
+          BigInt.from(distance)
+        ],
+      );
+      debugPrint('Active request created: $response');
+    } catch (e) {
+      debugPrint('Error creating active request: $e');
+    }
+  }
 }
