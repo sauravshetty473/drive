@@ -37,7 +37,9 @@ class _DesignationState extends State<Designation> {
                           primary: Colors.green.shade600,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'driverdetails');
+                      },
                       child: Text("Driver",
                           style: AppFonts.text16Bold
                               .copyWith(color: Colors.white))),
