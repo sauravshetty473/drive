@@ -1,3 +1,4 @@
+import 'package:drive/main_services.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
@@ -12,6 +13,7 @@ class _UserDetailsState extends State<UserDetails> {
   TextEditingController numbercontroller = TextEditingController();
   PhoneNumber number =
       PhoneNumber(countryISOCode: 'IN', number: '91', countryCode: '91');
+  MainServices m = new MainServices();
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +115,9 @@ class _UserDetailsState extends State<UserDetails> {
                                   backgroundColor: Color(0xff4c505b),
                                   child: IconButton(
                                       color: Colors.black,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, 'home');
+                                      },
                                       icon: Icon(
                                         Icons.arrow_forward,
                                       )),

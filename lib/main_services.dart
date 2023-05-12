@@ -18,9 +18,9 @@ class MainServices extends ChangeNotifier {
   final String _rpcUrl = 'http://0.0.0.1:7545';
   final String _wsUrl = 'ws://0.0.0.1:7545';
   final String driverPrivateKey =
-      '4395478c340cc700166039a04b60940df00b11a77b963d8e6d644dfc4155b588';
+      '275ac7d4d9c90b601272f8ab1baee5f4775ce97081a07eb41aad9cac3a209ae6';
   final String userPrivateKey =
-      'c4461f08392a2b133474add96ec4936f7d7f08d4236f17f68cc4d889b9e6fc80';
+      '82640a96935cbf4bbb6d5cd87c4a931ec7b21db647788de5947849856f587ea9';
   late Web3Client _web3client;
 
   MainServices() {
