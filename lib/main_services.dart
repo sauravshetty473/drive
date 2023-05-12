@@ -15,8 +15,8 @@ class MainServices extends ChangeNotifier {
   late StreamSubscription _driverAddedSubscription;
   late StreamSubscription _priceAddedSubscription;
 
-  final String _rpcUrl = 'http://0.0.0.1:7545';
-  final String _wsUrl = 'ws://0.0.0.1:7545';
+  final String _rpcUrl = 'http://192.168.0.106:7545';
+  final String _wsUrl = 'ws://192.168.0.106:7545';
   final String driverPrivateKey =
       '275ac7d4d9c90b601272f8ab1baee5f4775ce97081a07eb41aad9cac3a209ae6';
   final String userPrivateKey =
@@ -48,7 +48,7 @@ class MainServices extends ChangeNotifier {
     var jsonABI = jsonDecode(abiFile);
     _abiCode = ContractAbi.fromJson(jsonEncode(jsonABI['abi']), 'Drive');
     _contractAddress =
-        EthereumAddress.fromHex('0x57d0e2e7f14f4f3b19f15ba8789a270ef97755a3');
+        EthereumAddress.fromHex('0xB3694dE8A83Eeb3A83176758C024163A40F36E47');
   }
 
   late EthPrivateKey userCredentials;

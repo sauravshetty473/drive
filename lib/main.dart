@@ -35,6 +35,7 @@ class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(msProvider);
     final index = ref.watch(pageIndexProvider);
     return MaterialApp(
       title: 'Flutter Demo',
