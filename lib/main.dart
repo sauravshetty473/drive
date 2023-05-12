@@ -2,6 +2,8 @@ import 'package:drive/main_services.dart';
 import 'package:drive/pages/Login/designation.dart';
 import 'package:drive/pages/Login/login.dart';
 import 'package:drive/pages/Login/userdetails.dart';
+import 'package:drive/pages/home.dart';
+import 'package:drive/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:scaled_app/scaled_app.dart';
@@ -33,7 +35,6 @@ class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final ms = MainServices();
     final index = ref.watch(pageIndexProvider);
     return MaterialApp(
@@ -44,8 +45,9 @@ class MyApp extends HookConsumerWidget {
       routes: {
         'login': (context) => const Login(),
         'userdetails': (context) => UserDetails(),
+        'home': (context) => Home(),
       },
-      home: Designation(),
+      home: SplashScreen(),
     );
   }
 }
