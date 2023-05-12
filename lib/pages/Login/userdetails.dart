@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 
 class UserDetails extends StatefulWidget {
   @override
@@ -6,6 +8,11 @@ class UserDetails extends StatefulWidget {
 }
 
 class _UserDetailsState extends State<UserDetails> {
+  TextEditingController namecontroller = TextEditingController();
+  TextEditingController numbercontroller = TextEditingController();
+  PhoneNumber number =
+      PhoneNumber(countryISOCode: 'IN', number: '91', countryCode: '91');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,8 +24,9 @@ class _UserDetailsState extends State<UserDetails> {
               Container(
                 padding: EdgeInsets.only(left: 35, top: 30),
                 child: Text(
-                  'Create\nAccount',
-                  style: TextStyle(color: Colors.white, fontSize: 33),
+                  'Please provide your details',
+                  style: TextStyle(
+                      color: Colors.black.withOpacity(0.5), fontSize: 33),
                 ),
               ),
               SingleChildScrollView(
@@ -32,8 +40,15 @@ class _UserDetailsState extends State<UserDetails> {
                         margin: EdgeInsets.only(left: 35, right: 35),
                         child: Column(
                           children: [
-                            TextField(
+                            TextFormField(
                               style: TextStyle(color: Colors.black),
+                              controller: namecontroller,
+                              validator: (text) {
+                                if (text == null || text.isEmpty) {
+                                  return 'Text is empty';
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -56,32 +71,10 @@ class _UserDetailsState extends State<UserDetails> {
                             SizedBox(
                               height: 30,
                             ),
-                            TextField(
+                            IntlPhoneField(
                               style: TextStyle(color: Colors.black),
-                              decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  hintText: "Address",
-                                  hintStyle: TextStyle(color: Colors.black),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            TextField(
-                              style: TextStyle(color: Colors.black),
+                              controller: numbercontroller,
+                              initialCountryCode: 'IN',
                               keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                   enabledBorder: OutlineInputBorder(
@@ -109,7 +102,7 @@ class _UserDetailsState extends State<UserDetails> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Sign Up',
+                                  "Let's get started",
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 27,
@@ -127,28 +120,6 @@ class _UserDetailsState extends State<UserDetails> {
                                 )
                               ],
                             ),
-                            SizedBox(
-                              height: 40,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, 'login');
-                                  },
-                                  child: Text(
-                                    'Sign In',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: Colors.white,
-                                        fontSize: 18),
-                                  ),
-                                  style: ButtonStyle(),
-                                ),
-                              ],
-                            )
                           ],
                         ),
                       )
