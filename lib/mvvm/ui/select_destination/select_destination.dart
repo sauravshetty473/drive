@@ -1,6 +1,8 @@
-import 'package:drive/mvvm/foundation/app_colors.dart';
+import 'package:drive/main.dart';
 import 'package:drive/mvvm/foundation/app_fonts.dart';
+import 'package:drive/mvvm/ui/component/custom_scaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 enum Destination {
@@ -27,32 +29,74 @@ class SelectDestination extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      backgroundColor: AppColors.DOCTOR_BLUE,
-      body: Center(
-        child: ListView(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            children: [
-              ListTile(
-                  title: Text(
-                'Choose a destination',
-                style: AppFonts.text16Light.copyWith(color: Colors.blue),
-              )),
-              ...Destination.values.map((e) {
-                return ListTile(
-                  title: Text(
-                    e.titleCaseName,
-                    style: AppFonts.text20SemiBold,
-                  ),
-                  subtitle: Text(
-                    'distance ${e.distance}',
-                    style: AppFonts.text12Light
-                  ),
-                );
-              }).toList()
-            ]),
+    final index = useState<int>(0);
+    return CustomScaffold(
+      title: 'Select\nDestination',
+      topRightAction: Icon(
+        Icons.cancel,
+        size: 60,
+        color: Colors.white.withOpacity(0.4),
       ),
+      bottomRightAction: InkWell(
+        onTap: (){
+          ref.read(pageIndexProvider.notifier).update((state) => 1);
+        },
+        child: const Icon(
+          Icons.arrow_circle_right,
+          size: 60,
+        ),
+      ),
+      children: Destination.values
+          .map((e) => Container(
+                margin: const EdgeInsets.only(bottom: 20),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                        width: 2,
+                        color: index.value == e.index
+                            ? Colors.black.withOpacity(0.2)
+                            : Colors.transparent)),
+                child: InkWell(
+                  onTap: () {
+                    index.value = e.index;
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      const Icon(
+                        Icons.pin_drop,
+                        size: 40,
+                        color: Colors.red,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      Flexible(
+                        child: Text(
+                          e.titleCaseName,
+                          style: AppFonts.text24SemiBold.copyWith(
+                            color: Colors.black38,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: Colors.grey),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        child: Text(
+                          '${e.distance} km',
+                          style: AppFonts.text12Light,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ))
+          .toList(),
     );
   }
 }

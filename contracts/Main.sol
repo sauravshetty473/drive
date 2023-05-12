@@ -2,11 +2,11 @@
 pragma solidity >=0.5.0 <0.9.0;
 
 contract Drive {
+    address deployer;
 
     constructor() {
         deployer = msg.sender;
     }
-
 
     struct Driver {
         string name;
@@ -41,6 +41,28 @@ contract Drive {
     mapping(address => address) public confirmedRides;
     mapping(address => address) public completedRides;
 
+    event DriverAddedToLocation(address indexed passenger, address driver);
+    event PriceAddedToLocation(address indexed passenger, int256 price);
+
+    function getAllActiveRequests() public view returns (address[] memory) {
+        uint256 activeRequestCount = 0;
+        address[] memory activeRequests = new address[](msg.sender);
+        for (uint256 i = 0; i < activeRequests.length; i++) {
+            if (activeRequest[activeRequests[i]].fare == 0) {
+                activeRequestCount++;
+            }
+        }
+        address[] memory result = new address[](activeRequestCount);
+        uint256 index = 0;
+        for (uint256 i = 0; i < activeRequests.length; i++) {
+            if (activeRequest[activeRequests[i]].fare == 0) {
+                result[index] = activeRequests[i];
+                index++;
+            }
+        }
+        return result;
+    }
+
     function registerAsDriver(string memory _name, address payable _driverAddress, string memory _license, string memory _numberPlate, int256 _fare) public {
         // Make sure only the deployer can register a new Driver
         require(msg.sender == deployer, "Only the contract deployer can register a new driver");
@@ -56,7 +78,6 @@ contract Drive {
         });
     }
 
-
     function registerAsPassenger(string memory _name, string memory _phoneNumber) public {
         // Make sure the caller has not already registered as a Passenger
         require(passengers[msg.sender].passengerAddress == address(0), "You have already registered as a passenger");
@@ -70,7 +91,7 @@ contract Drive {
         });
     }
 
-    function createActiveRequest(string memory _pickUp, string memory _dropOff, uint256 _distance) public {
+    function createActiveRequest(string memory _pickUp, string memory _dropOff, int256 _distance) public {
         // Make sure the caller has not already created an active request
         require(activeRequest[msg.sender].fare == 0, "You already have an active request");
 
@@ -88,9 +109,9 @@ contract Drive {
     }
 
 
-    function negotiatePrice(address _passengerAddress, uint256 _price) public {
+    function negotiatePrice(address _passengerAddress, int256 _price) public {
 
-        require(drivers[msg.sender] != address(0), "You are not a registered driver");
+        require(drivers[msg.sender].driverAddress == msg.sender, "You are not a registered driver");
 
         // Add the driver to the list of drivers for the passenger's location
         listDriver[_passengerAddress].push(drivers[msg.sender]);
@@ -98,7 +119,11 @@ contract Drive {
         // Add the price to the list of prices for the passenger's location
         price[_passengerAddress].push(_price);
 
+
+        // Emit events for the updated mappings
+        emit DriverAddedToLocation(_passengerAddress, msg.sender);
+        emit PriceAddedToLocation(_passengerAddress, _price);
         // Store the driver's connection to the passenger in the driverConnection mapping
-        driverConnection[_passengerAddress] = driver.driverAddress;
+        driverConnection[_passengerAddress] = msg.sender;
     }
 }
