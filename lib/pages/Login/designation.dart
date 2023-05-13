@@ -1,7 +1,11 @@
 import 'package:drive/mvvm/foundation/app_fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../mvvm/foundation/app_colors.dart';
+
+
+final statusProvider = StateProvider<bool>((ref) => true);
 
 class Designation extends StatefulWidget {
   @override
@@ -37,7 +41,9 @@ class _DesignationState extends State<Designation> {
                           primary: Colors.green.shade600,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                       child: Text("Driver",
                           style: AppFonts.text16Bold
                               .copyWith(color: Colors.white))),

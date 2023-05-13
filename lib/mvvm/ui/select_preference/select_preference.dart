@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../loading_screen.dart';
 import '../../../main.dart';
+import '../../../main_services.dart';
 
 enum Vehicle {
   uberX(
@@ -34,67 +36,85 @@ class SelectPreference extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final msClass = ref.watch(msProvider.notifier);
+    final isLoading = useState<bool>(false);
+
     final index = useState<int>(0);
-    return CustomScaffold(
-      title: 'Choose\nPreference',
-      topRightAction: InkWell(
-        onTap: () {
-          ref.read(pageIndexProvider.notifier).update((state) => 2);
-        },
-        child: Text(
-          'SKIP',
-          style: AppFonts.text16Light
-              .copyWith(color: Colors.white.withOpacity(0.4)),
-        ),
-      ),
-      bottomRightAction: InkWell(
-        onTap: () {
-          ref.read(pageIndexProvider.notifier).update((state) => 2);
-        },
-        child: const Icon(
-          Icons.arrow_circle_right,
-          size: 60,
-        ),
-      ),
-      children: Vehicle.values.map((e) {
-        return Container(
-          width: double.infinity,
-          margin: const EdgeInsets.only(bottom: 20),
-          decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                  width: 2,
-                  color: e.index == index.value ? Colors.black : Colors.white)),
-          padding: const EdgeInsets.all(20),
-          child: InkWell(
-            onTap: () {
-              index.value = e.index;
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  e.titleCaseName,
-                  style: AppFonts.text24Bold.copyWith(color: Colors.black),
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      child: isLoading.value
+          ? const LoadingScreen()
+          : CustomScaffold(
+              title: 'Choose\nPreference',
+              topRightAction: InkWell(
+                onTap: () {
+                  ref.read(pageIndexProvider.notifier).update((state) => 2);
+                },
+                child: Text(
+                  'SKIP',
+                  style: AppFonts.text16Light
+                      .copyWith(color: Colors.white.withOpacity(0.4)),
                 ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.people,
-                      color: Colors.black,
+              ),
+              bottomRightAction: InkWell(
+                onTap: () {
+                  isLoading.value = true;
+                  Future.wait([
+                    msClass.createActiveRequest('', '', 10),
+                    Future.delayed(const Duration(seconds: 2))
+                  ]).then((value) {
+                    ref.read(pageIndexProvider.notifier).update((state) => 2);
+                  });
+                },
+                child: const Icon(
+                  Icons.arrow_circle_right,
+                  size: 60,
+                ),
+              ),
+              children: Vehicle.values.map((e) {
+                return Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                          width: 2,
+                          color: e.index == index.value
+                              ? Colors.black
+                              : Colors.white)),
+                  padding: const EdgeInsets.all(20),
+                  child: InkWell(
+                    onTap: () {
+                      index.value = e.index;
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          e.titleCaseName,
+                          style:
+                              AppFonts.text24Bold.copyWith(color: Colors.black),
+                        ),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.people,
+                              color: Colors.black,
+                            ),
+                            Text(
+                              ' ${e.numberOfPeople}',
+                              style: AppFonts.text24Bold
+                                  .copyWith(color: Colors.black),
+                            )
+                          ],
+                        )
+                      ],
                     ),
-                    Text(
-                      ' ${e.numberOfPeople}',
-                      style: AppFonts.text24Bold.copyWith(color: Colors.black),
-                    )
-                  ],
-                )
-              ],
+                  ),
+                );
+              }).toList(),
             ),
-          ),
-        );
-      }).toList(),
     );
   }
 }

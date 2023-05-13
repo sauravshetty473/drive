@@ -18,9 +18,9 @@ class MainServices extends ChangeNotifier {
   final String _rpcUrl = 'http://192.168.0.106:7545';
   final String _wsUrl = 'ws://192.168.0.106:7545';
   final String driverPrivateKey =
-      '275ac7d4d9c90b601272f8ab1baee5f4775ce97081a07eb41aad9cac3a209ae6';
+      '0x989aaecd3f6e7720f485bc0bf6e671d2bd59bba0602581b0cddb69b304902a14';
   final String userPrivateKey =
-      '82640a96935cbf4bbb6d5cd87c4a931ec7b21db647788de5947849856f587ea9';
+      '0xf0d108e2352f4f28e614e01c53f43adeb80a7ea8adce4027f3299e455d9e0397';
   late Web3Client _web3client;
 
   MainServices() {
@@ -48,7 +48,7 @@ class MainServices extends ChangeNotifier {
     var jsonABI = jsonDecode(abiFile);
     _abiCode = ContractAbi.fromJson(jsonEncode(jsonABI['abi']), 'Drive');
     _contractAddress =
-        EthereumAddress.fromHex('0xB3694dE8A83Eeb3A83176758C024163A40F36E47');
+        EthereumAddress.fromHex('0x5D89E5b2E42c17DA4F85Aa774649A7CE4FBaa93C');
   }
 
   late EthPrivateKey userCredentials;
@@ -65,6 +65,8 @@ class MainServices extends ChangeNotifier {
   late ContractFunction _fetchDrivers;
   late ContractFunction _fetchPrices;
   late ContractFunction _sayHello;
+  late ContractFunction _getActiveRequests;
+  late ContractFunction _registerAsDriver;
 
   Future<void> getDeployedContract() async {
     _deployedContract = DeployedContract(_abiCode, _contractAddress);
@@ -73,8 +75,8 @@ class MainServices extends ChangeNotifier {
     _fetchDrivers = _deployedContract.function('fetchDrivers');
     _fetchPrices = _deployedContract.function('fetchPrices');
     _sayHello = _deployedContract.function('sayHello');
-
-    await hello();
+    _getActiveRequests = _deployedContract.function('getActiveRequests');
+    _registerAsDriver = _deployedContract.function('registerAsDriver');
   }
 
   Future<void> createActiveRequest(
@@ -85,16 +87,32 @@ class MainServices extends ChangeNotifier {
         contract: _deployedContract,
         function: _addRequest,
         params: [pickUp, dropOff, BigInt.from(distance)],
+        sender: userCredentials.address,
       );
       debugPrint('Active request created: $response');
     } catch (e) {
-      print(e);
       debugPrint('Error creating active request: $e');
     }
   }
 
+  Future<Map> getActiveRequests() async {
+    try {
+      // Encode the function parameters
+      final response = await _web3client.call(
+        contract: _deployedContract,
+        function: _getActiveRequests,
+        params: [],
+      );
+      debugPrint('Active request created: $response');
+      return {};
+    } catch (e) {
+      debugPrint('Error creating active request: $e');
+    }
+
+    return {};
+  }
+
   Future<void> hello() async {
-    print('what');
     try {
       // Encode the function parameters
       final response = await _web3client.call(
@@ -102,13 +120,42 @@ class MainServices extends ChangeNotifier {
         function: _sayHello,
         params: [],
       );
-      print('no');
-      print(response);
 
       debugPrint('Active request created: $response');
     } catch (e) {
-      print(e);
       debugPrint('Error creating active request: $e');
+    }
+  }
+
+  Future<void> register(String name, String phonenumber) async {
+    try {
+      // Encode the function parameters
+      final response = await _web3client.call(
+        contract: _deployedContract,
+        function: _registerAsPassenger,
+        params: [name, phonenumber],
+      );
+
+      debugPrint('User registered: $response');
+    } catch (e) {
+      debugPrint('Error registering user: $e');
+    }
+  }
+
+  Future<void> registerDriver(String name, String phonenumber, String carnumber,
+      String licensenumber) async {
+
+    try {
+      // Encode the function parameters
+      final response = await _web3client.call(
+        contract: _deployedContract,
+        function: _registerAsDriver,
+        params: [name, phonenumber, carnumber, licensenumber],
+      );
+      debugPrint('User registered: $response');
+    } catch (e) {
+
+      debugPrint('Error registering user: $e');
     }
   }
 }

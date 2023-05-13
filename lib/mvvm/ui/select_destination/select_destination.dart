@@ -30,6 +30,7 @@ class SelectDestination extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = useState<int>(0);
+
     return CustomScaffold(
       title: 'Select\nDestination',
       topRightAction: Icon(
@@ -38,7 +39,7 @@ class SelectDestination extends HookConsumerWidget {
         color: Colors.white.withOpacity(0.4),
       ),
       bottomRightAction: InkWell(
-        onTap: (){
+        onTap: () {
           ref.read(pageIndexProvider.notifier).update((state) => 1);
         },
         child: const Icon(

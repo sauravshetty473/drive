@@ -30,7 +30,7 @@ contract Drive {
         int256 fare;
         int256 distance;
     }
-
+    address[] public requestAddress;
     mapping(address => Ride) public rides;
     mapping(address => Driver) public drivers;
     mapping(address => Passenger) public passengers;
@@ -45,6 +45,23 @@ contract Drive {
         return "Hello, world!";
     }
 
+    function getActiveRequests() public view returns (Ride[] memory) {
+        uint count = 0;
+        for (uint i = 0; i < requestAddress.length; i++) {
+            if (activeRequest[requestAddress[i]].fare != 0) {
+                count++;
+            }
+        }
+        Ride[] memory ret = new Ride[](count);
+        uint j = 0;
+        for (uint i = 0; i < requestAddress.length; i++) {
+            if (activeRequest[requestAddress[i]].fare != 0) {
+                ret[j] = activeRequest[requestAddress[i]];
+                j++;
+            }
+        }
+        return ret;
+    }
     function registerAsDriver(string memory _name, address payable _driverAddress, string memory _license, string memory _numberPlate, int256 _fare) public {
         // Make sure only the deployer can register a new Driver
         require(msg.sender == deployer, "Only the contract deployer can register a new driver");
@@ -88,6 +105,7 @@ contract Drive {
         fare : 0,
         distance : _distance
         });
+        requestAddress.push(msg.sender);
     }
 
     function fetchDrivers() public view returns (Driver[] memory) {
