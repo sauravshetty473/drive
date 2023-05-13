@@ -17,6 +17,8 @@ class UserDetails extends StatefulHookConsumerWidget {
 }
 
 class _UserDetailsState extends ConsumerState<UserDetails> {
+  late String name;
+  late String phonenum;
   TextEditingController namecontroller = TextEditingController();
   TextEditingController numbercontroller = TextEditingController();
   PhoneNumber number =

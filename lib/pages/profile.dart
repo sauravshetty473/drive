@@ -122,26 +122,25 @@ class Profile extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                ...[
-                  [Icons.help, 'Help'],
-                  [Icons.wallet, 'Wallet'],
-                  [Icons.trip_origin, 'Trip']
-                ]
-                    .map((List e) => Container(
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: Row(
-                            children: [
-                              Icon(e[0]),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(e[1])
-                            ],
-                          ),
-                        ))
-                    .toList(),
-                const SizedBox(
-                  height: 20,
+                const Text(
+                  'Past Rides',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                const Text(
+                  'Your rides would be shown here.',
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w200),
+                ),
+                SizedBox(
+                  height: 300,
                 ),
                 const Text(
                   'v1.0.1',

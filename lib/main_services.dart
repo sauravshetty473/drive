@@ -15,8 +15,8 @@ class MainServices extends ChangeNotifier {
   late StreamSubscription _driverAddedSubscription;
   late StreamSubscription _priceAddedSubscription;
 
-  final String _rpcUrl = 'http://192.168.0.106:7545';
-  final String _wsUrl = 'ws://192.168.0.106:7545';
+  final String _rpcUrl = 'http://192.168.0.110:7545';
+  final String _wsUrl = 'ws://192.168.0.110:7545';
   final String driverPrivateKey =
       '0x989aaecd3f6e7720f485bc0bf6e671d2bd59bba0602581b0cddb69b304902a14';
   final String userPrivateKey =
@@ -135,6 +135,8 @@ class MainServices extends ChangeNotifier {
         function: _registerAsPassenger,
         params: [name, phonenumber],
       );
+      print('no');
+      print(response);
 
       debugPrint('User registered: $response');
     } catch (e) {
@@ -144,7 +146,6 @@ class MainServices extends ChangeNotifier {
 
   Future<void> registerDriver(String name, String phonenumber, String carnumber,
       String licensenumber) async {
-
     try {
       // Encode the function parameters
       final response = await _web3client.call(
@@ -154,7 +155,6 @@ class MainServices extends ChangeNotifier {
       );
       debugPrint('User registered: $response');
     } catch (e) {
-
       debugPrint('Error registering user: $e');
     }
   }
