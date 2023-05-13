@@ -1,6 +1,8 @@
+import 'package:drive/main.dart';
 import 'package:drive/mvvm/foundation/extension/context.dart';
 import 'package:drive/mvvm/ui/bidding/component/bid_action.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../foundation/app_colors.dart';
 import '../../../foundation/app_constants.dart';
@@ -9,14 +11,14 @@ import 'info.dart';
 
 enum BidFunction { select, cancel, confirm }
 
-class Bid extends StatelessWidget {
+class Bid extends HookConsumerWidget {
   final BidFunction bidFunction;
 
   const Bid({Key? key, this.bidFunction = BidFunction.select})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(
@@ -66,7 +68,8 @@ class Bid extends StatelessWidget {
                             // TODO: Handle this case.
                             break;
                           case BidFunction.confirm:
-                            // TODO: Handle this case.
+                            ref.read(pageIndexProvider.notifier).update((state) => state+1);
+                            context.pop();
                             break;
                         }
                       },

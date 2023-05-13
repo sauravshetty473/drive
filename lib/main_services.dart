@@ -48,7 +48,7 @@ class MainServices extends ChangeNotifier {
     var jsonABI = jsonDecode(abiFile);
     _abiCode = ContractAbi.fromJson(jsonEncode(jsonABI['abi']), 'Drive');
     _contractAddress =
-        EthereumAddress.fromHex('0x5D89E5b2E42c17DA4F85Aa774649A7CE4FBaa93C');
+        EthereumAddress.fromHex('0xD9259875A3f7afBF23c792F409177f5403ff70F2');
   }
 
   late EthPrivateKey userCredentials;

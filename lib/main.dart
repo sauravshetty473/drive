@@ -1,10 +1,10 @@
 import 'package:drive/main_services.dart';
 import 'package:drive/mvvm/ui/confirmed_ride/confirmed_ride.dart';
 import 'package:drive/mvvm/ui/offer/offer.dart';
+import 'package:drive/mvvm/ui/offer/offer_driver.dart';
 import 'package:drive/mvvm/ui/rate_driver/rate_driver.dart';
 import 'package:drive/mvvm/ui/select_destination/select_destination.dart';
 import 'package:drive/mvvm/ui/select_preference/select_preference.dart';
-import 'package:drive/pages/Login/designation.dart';
 import 'package:drive/pages/Login/driverdetails.dart';
 import 'package:drive/pages/Login/login.dart';
 import 'package:drive/pages/Login/userdetails.dart';
@@ -34,7 +34,7 @@ void main() {
   );
 }
 
-final pageIndexProvider = StateProvider((ref) => 0);
+final pageIndexProvider = StateProvider.autoDispose((ref) => 0);
 
 class MyApp extends HookConsumerWidget {
   const MyApp({super.key});
@@ -61,17 +61,22 @@ class MyApp extends HookConsumerWidget {
 }
 
 class StateManager extends HookConsumerWidget {
-  const StateManager({Key? key}) : super(key: key);
+  final bool driver;
+  const StateManager({this.driver = false, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(pageIndexProvider);
-    return const [
-      SelectDestination(),
-      SelectPreference(),
-      Offer(),
+    return driver?const [
+      OfferDriver(),
       ConfirmedRide(),
       RateDriver(),
+    ][index] : const [
+    SelectDestination(),
+    SelectPreference(),
+    Offer(),
+    ConfirmedRide(),
+    RateDriver(),
     ][index];
   }
 }

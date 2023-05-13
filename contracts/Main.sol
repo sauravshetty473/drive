@@ -62,7 +62,7 @@ contract Drive {
         }
         return ret;
     }
-    function registerAsDriver(string memory _name, address payable _driverAddress, string memory _license, string memory _numberPlate, int256 _fare) public {
+    function registerAsDriver(string memory _name, address payable _driverAddress, string memory _license, string memory _numberPlate) public {
         // Make sure only the deployer can register a new Driver
         require(msg.sender == deployer, "Only the contract deployer can register a new driver");
 
@@ -73,7 +73,7 @@ contract Drive {
         license : _license,
         numberPlate : _numberPlate,
         confirmation : false,
-        fare : _fare
+        fare : 0
         });
     }
 

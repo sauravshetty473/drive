@@ -4,15 +4,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../mvvm/foundation/app_colors.dart';
 
-
 final statusProvider = StateProvider<bool>((ref) => true);
 
-class Designation extends StatefulWidget {
+class Designation extends StatefulHookConsumerWidget {
   @override
-  _DesignationState createState() => _DesignationState();
+  ConsumerState createState() => _DesignationState();
 }
 
-class _DesignationState extends State<Designation> {
+class _DesignationState extends ConsumerState<Designation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,14 +41,16 @@ class _DesignationState extends State<Designation> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () {
-
+                        ref
+                            .read(statusProvider.notifier)
+                            .update((state) => false);
                         Navigator.pushNamed(context, 'driverdetails');
                       },
                       child: Text("Driver",
                           style: AppFonts.text16Bold
                               .copyWith(color: Colors.white))),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 50,
                 ),
                 SizedBox(
@@ -61,18 +62,21 @@ class _DesignationState extends State<Designation> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () {
+                        ref
+                            .read(statusProvider.notifier)
+                            .update((state) => true);
                         Navigator.pushNamed(context, 'login');
                       },
                       child: Text("Passenger",
                           style: AppFonts.text16Bold
                               .copyWith(color: Colors.white))),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 100,
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             )
           ]),
