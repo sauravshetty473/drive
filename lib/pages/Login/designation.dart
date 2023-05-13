@@ -43,6 +43,7 @@ class _DesignationState extends State<Designation> {
                               borderRadius: BorderRadius.circular(10))),
                       onPressed: () {
 
+                        Navigator.pushNamed(context, 'driverdetails');
                       },
                       child: Text("Driver",
                           style: AppFonts.text16Bold

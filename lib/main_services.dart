@@ -117,11 +117,11 @@ class MainServices extends ChangeNotifier {
       // Encode the function parameters
       final response = await _web3client.call(
         contract: _deployedContract,
-        function: _sayHello,
+        function: _registerAsPassenger,
         params: [],
       );
 
-      debugPrint('Active request created: $response');
+      debugPrint('User registered: $response');
     } catch (e) {
       debugPrint('Error creating active request: $e');
     }

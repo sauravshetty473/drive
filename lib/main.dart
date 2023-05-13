@@ -4,6 +4,8 @@ import 'package:drive/mvvm/ui/offer/offer.dart';
 import 'package:drive/mvvm/ui/rate_driver/rate_driver.dart';
 import 'package:drive/mvvm/ui/select_destination/select_destination.dart';
 import 'package:drive/mvvm/ui/select_preference/select_preference.dart';
+import 'package:drive/pages/Login/designation.dart';
+import 'package:drive/pages/Login/driverdetails.dart';
 import 'package:drive/pages/Login/login.dart';
 import 'package:drive/pages/Login/userdetails.dart';
 import 'package:drive/pages/home.dart';
@@ -50,7 +52,8 @@ class MyApp extends HookConsumerWidget {
       routes: {
         'login': (context) => const Login(),
         'userdetails': (context) => UserDetails(),
-        'home': (context) => const Home(),
+        'home': (context) => Home(),
+        'driverdetails': (context) => DriverDetails(),
       },
       home: const SplashScreen(),
     );
