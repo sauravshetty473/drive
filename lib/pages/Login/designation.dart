@@ -33,7 +33,7 @@ class _DesignationState extends ConsumerState<Designation> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 120,
+                  width: 140,
                   height: 60,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -51,10 +51,10 @@ class _DesignationState extends ConsumerState<Designation> {
                               .copyWith(color: Colors.white))),
                 ),
                 const SizedBox(
-                  width: 50,
+                  width: 30,
                 ),
                 SizedBox(
-                  width: 120,
+                  width: 140,
                   height: 60,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(

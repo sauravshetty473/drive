@@ -9,13 +9,13 @@ import '../../../main.dart';
 import '../../../main_services.dart';
 
 enum Vehicle {
-  uberX(
-      4, 'https://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-uberx.png'),
-  uberXL(6,
-      'https://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-uberxl2.png'),
-  uberBlack(
+  driveX(4,
+      'https://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-drivex.png'),
+  driveXL(6,
+      'https://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-drivexl2.png'),
+  driveBlack(
       4, 'https://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-black.png'),
-  uberSUV(
+  driveSUV(
       6, 'https://d1a3f4spazzrp4.cloudfront.net/car-types/mono/mono-suv2.png');
 
   final int numberOfPeople;
@@ -59,10 +59,7 @@ class SelectPreference extends HookConsumerWidget {
               bottomRightAction: InkWell(
                 onTap: () {
                   isLoading.value = true;
-                  Future.wait([
-                    msClass.createActiveRequest('', '', 10),
-                    Future.delayed(const Duration(seconds: 2))
-                  ]).then((value) {
+                  Future.delayed(const Duration(seconds: 2)).then((value) {
                     ref.read(pageIndexProvider.notifier).update((state) => 2);
                   });
                 },

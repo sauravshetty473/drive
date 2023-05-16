@@ -7,33 +7,38 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ConfirmedRide extends HookConsumerWidget {
-  const ConfirmedRide({Key? key}) : super(key: key);
+  final bool isDriver;
+  const ConfirmedRide({Key? key, this.isDriver = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomScaffold(
       title: 'Ride\nInitiated',
-      children: [
-        InkWell(
-          onTap: () {
-            context.push(const UpiPayment());
-            ref.read(pageIndexProvider.notifier).update((state) => state + 1);
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.lightGreen),
-            width: double.infinity,
-            height: 100,
-            child: Center(
-              child: Text(
-                'PAY',
-                style: AppFonts.text24Bold,
-              ),
-            ),
-          ),
-        )
-      ],
+      children: isDriver
+          ? []
+          : [
+              InkWell(
+                onTap: () {
+                  context.push(const UpiPayment());
+                  ref
+                      .read(pageIndexProvider.notifier)
+                      .update((state) => state + 1);
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Colors.lightGreen),
+                  width: double.infinity,
+                  height: 100,
+                  child: Center(
+                    child: Text(
+                      'PAY',
+                      style: AppFonts.text24Bold,
+                    ),
+                  ),
+                ),
+              )
+            ],
     );
   }
 }

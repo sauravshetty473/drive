@@ -1,12 +1,14 @@
 import 'package:drive/mvvm/ui/bidding/component/bid.dart';
 import 'package:drive/mvvm/ui/bidding/component/bid_info.dart';
+import 'package:drive/pages/Login/designation.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../foundation/app_colors.dart';
 import '../../../foundation/app_constants.dart';
 import '../../../foundation/app_fonts.dart';
 
-class BidAction extends StatelessWidget {
+class BidAction extends HookConsumerWidget {
   final BidFunction bidFunction;
   final bool alter;
 
@@ -14,7 +16,7 @@ class BidAction extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: const BoxDecoration(
           color: AppColors.WHITE,

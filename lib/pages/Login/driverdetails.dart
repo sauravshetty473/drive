@@ -206,7 +206,7 @@ class _DriverDetailsState extends ConsumerState<DriverDetails> {
                                           "Let's get started",
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 27,
+                                              fontSize: 25,
                                               fontWeight: FontWeight.w700),
                                         ),
                                         CircleAvatar(
@@ -217,15 +217,9 @@ class _DriverDetailsState extends ConsumerState<DriverDetails> {
                                               color: Colors.black,
                                               onPressed: () {
                                                 isLoading.value = true;
-                                                Future.wait([
-                                                  msClass.registerDriver(
-                                                      namecontroller.text,
-                                                      numbercontroller.text,
-                                                      carnumber.text,
-                                                      license.text),
-                                                  Future.delayed(const Duration(
-                                                      seconds: 2))
-                                                ]).then((value) {
+                                                Future.delayed(const Duration(
+                                                        seconds: 2))
+                                                    .then((value) {
                                                   context
                                                       .push(const StateManager(
                                                     driver: true,

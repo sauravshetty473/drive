@@ -136,7 +136,7 @@ class _UserDetailsState extends ConsumerState<UserDetails> {
                                           "Let's get started",
                                           style: TextStyle(
                                               color: Colors.black,
-                                              fontSize: 27,
+                                              fontSize: 25,
                                               fontWeight: FontWeight.w700),
                                         ),
                                         CircleAvatar(
@@ -147,16 +147,13 @@ class _UserDetailsState extends ConsumerState<UserDetails> {
                                               color: Colors.black,
                                               onPressed: () {
                                                 isLoading.value = true;
-                                                Future.wait([
-                                                  msClass.register(
-                                                      namecontroller.text,
-                                                      numbercontroller.text),
-                                                  Future.delayed(const Duration(
-                                                      seconds: 2))
-                                                ]).then((value) {
+                                                Future.delayed(const Duration(
+                                                        seconds: 2))
+                                                    .then((value) {
                                                   context.push(
                                                       const StateManager());
                                                 });
+
                                                 //Navigator.pushNamed(context, 'home');
                                               },
                                               icon: const Icon(

@@ -1,6 +1,7 @@
 import 'package:drive/main.dart';
 import 'package:drive/mvvm/foundation/extension/context.dart';
 import 'package:drive/mvvm/ui/bidding/component/bid_action.dart';
+import 'package:drive/pages/Login/designation.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -19,6 +20,7 @@ class Bid extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final status = ref.watch(statusProvider);
     return Container(
       padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(
@@ -68,7 +70,9 @@ class Bid extends HookConsumerWidget {
                             // TODO: Handle this case.
                             break;
                           case BidFunction.confirm:
-                            ref.read(pageIndexProvider.notifier).update((state) => state+1);
+                            ref
+                                .read(pageIndexProvider.notifier)
+                                .update((state) => state + 1);
                             context.pop();
                             break;
                         }

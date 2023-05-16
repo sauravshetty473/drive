@@ -2,6 +2,7 @@ import 'package:drive/main_services.dart';
 import 'package:drive/mvvm/ui/confirmed_ride/confirmed_ride.dart';
 import 'package:drive/mvvm/ui/offer/offer.dart';
 import 'package:drive/mvvm/ui/offer/offer_driver.dart';
+import 'package:drive/mvvm/ui/put_price/put_price.dart';
 import 'package:drive/mvvm/ui/rate_driver/rate_driver.dart';
 import 'package:drive/mvvm/ui/select_destination/select_destination.dart';
 import 'package:drive/mvvm/ui/select_preference/select_preference.dart';
@@ -67,16 +68,21 @@ class StateManager extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(pageIndexProvider);
-    return driver?const [
-      OfferDriver(),
-      ConfirmedRide(),
-      RateDriver(),
-    ][index] : const [
-    SelectDestination(),
-    SelectPreference(),
-    Offer(),
-    ConfirmedRide(),
-    RateDriver(),
-    ][index];
+    return driver
+        ? const [
+            OfferDriver(),
+            PutPrice(),
+            ConfirmedRide(
+              isDriver: true,
+            ),
+            RateDriver(),
+          ][index]
+        : const [
+            SelectDestination(),
+            SelectPreference(),
+            Offer(),
+            ConfirmedRide(),
+            RateDriver(),
+          ][index];
   }
 }
